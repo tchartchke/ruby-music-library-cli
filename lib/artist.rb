@@ -36,7 +36,7 @@ class Artist
     if song.artist.nil?
       if !self.songs.include?(song)
         self.songs << song
-        song.instance_variable_set(:@artist, self)
+        song.instance_variable_set(:@artist, self) #janky AF. look into saving in artist
       end
     end
     self
