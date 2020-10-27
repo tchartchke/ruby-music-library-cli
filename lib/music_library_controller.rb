@@ -1,5 +1,5 @@
 class MusicLibraryController
-
+  # sorted songs, artist, genres available as attr
   def initialize(path = './db/mp3s')
     MusicImporter.new(path).import
   end
@@ -38,7 +38,6 @@ class MusicLibraryController
     Song.all.sort_by {|song| song.name}.each_with_index do |song, i|
       puts "#{i+1}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
     end
-    Song.all.sort_by {|song| song.name}
   end
 
   def list_artists
@@ -76,8 +75,14 @@ class MusicLibraryController
   def play_song
     puts "Which song number would you like to play?"
     number = gets.strip.to_i - 1
-    song = Song.all.sort_by {|song| song.name}[number] 
-    puts "Playing #{song.name} by #{song.artist.name}"
+    if number.between?(0, Song.all.size)
+    # TODO does not 'puts' anything out if a matching song is not found (FAILED - 1)
+    # TODO checks that the user entered a number between 1 and the total number of songs in the library
+      song = Song.all.sort_by {|song| song.name}[number] 
+      puts "Playing #{song.name} by #{song.artist.name}" if !song.nil?
+        
+      
+    end
   end
 
 end

@@ -28,6 +28,11 @@ class Artist
   end
 
   def add_song(song)
+
+    #each has method that set their own attribute and then different method that sets that same attribute for the other classes. 
+    #postentially could try with different code path
+    #try to not duplicate the state
+
     if song.artist.nil?
       if !self.songs.include?(song)
         self.songs << song
@@ -41,6 +46,8 @@ class Artist
     set = Set.new
     self.songs.each do |song|
       set |= Set[song.genre]
+
+      # TODO <<, multiset vs set, check if uniqness! yes. so won't need to use union
     end
     set
   end

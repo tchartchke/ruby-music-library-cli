@@ -6,6 +6,7 @@ class MusicImporter
   end
 
   def files
+    #does children get directories?
     Dir.children(self.path)
   end
 
